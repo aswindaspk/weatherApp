@@ -1,0 +1,482 @@
+
+:root{
+    --nav-height : 5rem;
+    --container-width : 85%;
+    --bgcolor : rgb(0, 0, 0, 0.15);
+}
+
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    font-family: "poppins";
+}
+
+
+
+
+
+
+/* ------- NAV-BAR START ------ */
+
+.header{
+    top: 0;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    height: var(--nav-height);
+    width: 100%;
+    z-index: 999;
+    background-color: white;
+    border-bottom: 1px solid rgba(67, 67, 67, 0.312);
+    transition: background-color 0.5s ease;
+}
+
+.header.scrolled{
+    background-color: whitesmoke ;
+}
+
+.navigation{
+    width: inherit;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+}
+.logo{
+    display: flex;
+    align-self: center;
+}
+
+.city-input{
+    width: 230px;
+    padding: 10px 10px;
+    border: 1px solid transparent;
+    border-radius: 99px;
+    background: var(--bgcolor);
+    outline: none;
+    font-weight: 500;
+}
+.city-input:focus{
+    border: solid var(--bgcolor);
+}
+.city-input::placeholder{
+    color: black;
+}
+
+.search-container{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.search-btn{
+    position: absolute;
+    right: 7px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.location-btn{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+.nav-items{
+    display: inline-flex;
+    gap: 5px;
+}
+
+
+
+/* ------- NAV-BAR END ------ */
+
+
+
+
+
+
+/* ------ MAIN START ------ */
+
+
+/* ------ LOCATION-WISE START ------ */
+
+
+
+.main{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    height: fit-content;
+    overflow: hidden;
+    /* background-color: blue; */
+}
+
+.main::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('./bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(30px);
+      z-index: -1;
+      transform: scale(1.1);
+    }
+
+
+
+.container-main{
+    position: relative;
+    margin: calc(var(--nav-height) + 2rem) 4% 2rem 4%;
+    width: var(--container-width);
+    display: grid;
+    grid-template-columns: 1.1fr 0.5fr;
+    gap: 5%;
+    justify-content: space-between;
+    height: fit-content;
+    padding-bottom: 5%;
+
+}
+
+@media screen and (max-width: 1025px) {
+  .container-main {
+    position: relative;
+    margin: calc(var(--nav-height) + 2rem) 4% 2rem 4%;
+    width: var(--container-width);
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    justify-content: space-between;
+    height: fit-content;
+  }
+  .others{
+    padding-top: 5%;
+  }
+ 
+}
+
+.weather-now, .others{
+    /* width: 100%; */
+    height: 500px;
+    border: solid transparent;
+    border-radius: 10px;
+}
+
+.weather-now{
+    padding: 2%;
+    display: grid;
+    grid-template-rows: 20% 50% 30%;
+    background-color: var(--bgcolor);
+    backdrop-filter: blur(20px);
+}
+
+.location-date, .weather-misc{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.location-c, .date-c{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.location, .date-div{
+    font-size: clamp(1.1rem, 2vw, 2rem);
+}
+
+
+.weather-value{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+}
+
+.weather-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-weather-reading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather-reading{
+    display: block;
+}
+
+.weather-icon{
+    height: 13vw;
+    min-height: 150px;
+}
+
+.temperature{
+    font-family: "Fira Sans Extra Condensed";
+    font-weight: 100;
+    font-size: 7vw;
+}
+
+.weather-misc{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    /* background-color: black; */
+}
+
+.weather-items{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    min-width: 160px;
+    /* background-color: aqua; */
+}
+
+.misc-icon{
+    /* background-color: blue; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.4rem,4vw,2rem);
+}
+
+.misc-item{
+    /* background-color: beige; */
+    display: block;
+    align-items: center;
+}
+
+
+
+
+
+/* ------ LOCATION-WISE END ------ */
+
+
+
+/* ------ OTHER DETAILS START ------ */
+
+
+.others{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.time, .future-forecast{
+    background-color: var(--bgcolor);
+    backdrop-filter: blur(20px);
+    border: solid transparent;
+    border-radius: 10px;
+}
+
+.sun{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.sun-img{
+    height: 35px;
+}
+
+.sun-rise-set{
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+.sun-left{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sun-right{
+    display: grid;
+    grid-template-rows: 40% 60%;
+}
+.time{
+    border: solid transparent;
+}
+.time-now{
+    text-align: center;
+    font-size: 50px;
+}
+.future-forecast-title{
+    text-align: center;
+    font-size: 18px;
+}
+
+.future-forecast-value{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0.3%;
+}
+
+.future-forecast-value:hover{
+    background-color: rgb(0, 0, 0, 0.2) ;
+    cursor: pointer;
+}
+
+.ffv-icon{
+    width: 50px;
+}
+
+hr{
+    border: none;
+    height: 1px;
+    width: 100%;
+    margin: 2px;
+    background: linear-gradient(to right, transparent 0%, #444 20%, #444 80%, transparent 100%);
+}
+
+
+
+
+/* ------ OTHER DETAILS END ------ */
+
+
+
+/* ------ MAIN END ------ */
+
+
+/* ------ MESSAGE WINDOW START ------ */
+
+.message-container{
+    z-index: 1;
+    background-color: var(--bgcolor);                                                                                               
+    height: 500px;
+    width: 350px;
+    margin-top: 16vh;
+    /* border: solid white; */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(20px);
+    margin-bottom: 20px;
+}
+
+
+.message-img{
+    height: 200px;
+}
+
+.message{
+    font-size: small;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* ------ MESSAGE WINDOW END ------ */
+
+.arrow{
+    position: absolute;
+    top: 95vh;
+}
+
+#arrow{
+    font-size: 5vh;
+}
+
+#arrow:hover{
+    cursor: pointer;
+}
+
+
+
+.main1{
+    position: relative;
+}
+
+.introduction{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url(./c1bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.tagline{
+    font-size: 10vh;
+    padding-bottom: 2%;
+    font-weight: 600;
+}
+
+.logoIntro{
+    font-size: 4vh;
+    padding-bottom: 5%;
+}
+.desc{
+    font-size: 18px;
+}
+
+#down-arrow{
+    position: absolute;
+    font-size: 30px;
+    bottom: 2%;
+}
+#down-arrow:hover{
+    cursor: pointer;
+}
+
+
+.footer{
+    position: relative;
+    min-height: 70vh;
+    display: grid;
+    grid-template-rows: 20% 60% 20%;
+    background-color: whitesmoke;
+    padding-left: 185px;
+    padding-right: 185px;
+    padding-top: 50px;
+}
+.f_uber{
+    font-size: 25px;
+    color: white;
+}
+.f1{
+    display: block;
+}
+.f2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2vw;
+    text-align: center  ;
+}
+.copyright{
+    font-size: 15px;
+    color: black;
+}
+.f3{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
