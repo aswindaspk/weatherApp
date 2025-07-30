@@ -433,6 +433,10 @@ hr{
     font-size: 4vh;
     padding-bottom: 5%;
 }
+
+.logointoImg{
+    height: 5.5vh;
+}
 .desc{
     font-size: 18px;
 }
@@ -453,14 +457,16 @@ hr{
     display: grid;
     grid-template-rows: 20% 60% 20%;
     background-color: whitesmoke;
-    padding-left: 185px;
-    padding-right: 185px;
+    padding-left: 15%;
+    padding-right: 15%;
     padding-top: 50px;
 }
-.f_uber{
-    font-size: 25px;
-    color: white;
+.f1-contain{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
+
 .f1{
     display: block;
 }
@@ -469,7 +475,8 @@ hr{
     align-items: center;
     justify-content: center;
     font-size: 2vw;
-    text-align: center  ;
+    text-align: center;
+    flex-wrap: wrap;
 }
 .copyright{
     font-size: 15px;
@@ -477,6 +484,12 @@ hr{
 }
 .f3{
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
+}
+
+.credit{
+    display: flex;
+    gap: 10px;
 }
