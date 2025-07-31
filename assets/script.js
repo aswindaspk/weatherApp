@@ -20,6 +20,14 @@ const aqiValue = document.querySelector('.aqi')
 const futureForecastContainer = document.querySelector('.future-forecast-container')
 const sunriseTime = document.querySelector('.sunrise')
 const sunsetTime = document.querySelector('.sunset')
+const locationBtn = document.querySelector('.location-btn')
+
+
+
+// Loading Overlay
+const loadingOverlay = document.querySelector('#loading-overlay')
+loadingOverlay.style.display = 'none';
+
 
 
 
@@ -30,21 +38,6 @@ const weatherApiKey = 'd173b2e0952bc52ffaa9b5006f168438'
 const timeZoneApiKey = '13IZKCCOJM65'
 
 
-//globaltimestamp
-// globalTimeStamp = null;
-
-
-//check if screen is scrolled
-
-
-window.addEventListener('scroll', () => {
-  const navbar = document.querySelector('.header')
-  if (window.scrollY > 0) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
-})
 
 
 searchBtn.addEventListener('click', () => {
@@ -55,6 +48,9 @@ searchBtn.addEventListener('click', () => {
     }
 })
 
+
+
+
 cityInput.addEventListener('keydown', (event) =>{
     if (cityInput.value.trim() != '' && event.key == 'Enter') {
         findWeather(cityInput.value.trim())
@@ -64,7 +60,18 @@ cityInput.addEventListener('keydown', (event) =>{
 })
 
 
+locationBtn.addEventListener('click', ()=>{
+    getCoordinates()
+})
+
+
+
+
 async function findWeather(city) {
+
+loadingOverlay.style.display = 'flex';
+
+    try{
     const weatherData = await fetchWeatherData('weather', city)
     console.log(weatherData);
 
@@ -95,11 +102,10 @@ async function findWeather(city) {
     humidityValue.textContent = humidity +' %'
     wind_speed.textContent = `${getWindDirection(deg)}`+' '+Math.round(speed*3.6) +' km/h'
     weatherImg.src = `./assets/weather/${getWeatherImg(id)}`
-    dateToday.textContent = `${getDate(dt, timezone)}`
-    const timeNowData = await getTime(lat, lon)
+    const [dateNowData,timeNowData]= await getTime(lat, lon)
     timeNow.textContent = timeNowData
+    dateToday.textContent = dateNowData
     sunriseTime.textContent = `${getSunTime(sunrise,timezone)}`
-    sunsetTime.textContent = `${getSunTime(sunset,timezone)}`
     const [aqiReading,aqiColor] = await getAirQualityIndex(lat, lon)
     aqiValue.textContent = aqiReading
     aqiValue.style.color = aqiColor
@@ -107,10 +113,14 @@ async function findWeather(city) {
 
     //forecast data access
     await getForecastData(name)
+}
+finally{
+    loadingOverlay.style.display = 'none';
+}
 
     
 
-}
+} 
 
 
 async function fetchWeatherData(endPoint, city) {
@@ -155,27 +165,21 @@ function getWeatherImg(id) {
     }
 }
 
-function getDate(dt, timezone) {
-    const localUtc = dt *1000
-    // globalTimeStamp = dt
-    // console.log(dt);
-    const localOffset = timezone*1000
-    const localTimeStamp = localUtc + localOffset
-    const localDate = new Date(localTimeStamp)
-    const optionDate = { weekday: 'long', day: 'numeric', month: 'long' };
-    const formattedDate = localDate.toLocaleDateString('en-US', optionDate);
-    console.log("formatted date", formattedDate);
-    return formattedDate
-}
+
 
 async function getTime(lat, lon) {
     const timeApiUrl = `http://api.timezonedb.com/v2.1/get-time-zone?key=${timeZoneApiKey}&format=json&by=position&lat=${lat}&lng=${lon}`;
     const timeDataResponse = await fetch(timeApiUrl)
     const timeData = await timeDataResponse.json()
     const timeValue = new Date(timeData.formatted)
+    console.log(timeValue);
+    const optionDate = { weekday: 'short', day: 'numeric', month: 'long' };
+    const formattedDate = timeValue.toLocaleDateString('en-US', optionDate);
+    console.log(formattedDate);
+    
     const optionTime = { hour: '2-digit', minute: '2-digit', hour12: true}
     const formattedTime = timeValue.toLocaleTimeString('en-US', optionTime)
-    return formattedTime
+    return [formattedDate, formattedTime]
 }
 
 function getSunTime(dt,timezone) {
@@ -290,4 +294,18 @@ async function getAirQualityIndex(lat, lon) {
     if (aqiValue === 3) return ['Moderate','#FF7E00'];
     if (aqiValue === 4) return ['Poor','#FF0000'];
     if (aqiValue === 5) return ['Very Poor','#99004C'];
+}
+
+
+async function getCoordinates() {
+    navigator.geolocation.getCurrentPosition(async position => {
+        const {latitude, longitude} = position.coords;
+        console.log(latitude, longitude);
+        const locApi = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+        const data =await fetch(locApi)
+        const locationName = await data.json()
+        console.log(locationName.locality);
+        findWeather(locationName.locality)
+
+    })
 }
