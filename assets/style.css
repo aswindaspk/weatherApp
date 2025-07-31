@@ -426,6 +426,8 @@ hr{
     height: 5.5vh;
 }
 .desc{
+    padding-left: 1%;
+    padding-right: 1%;
     font-size: 18px;
 }
 
@@ -449,6 +451,7 @@ hr{
     padding-right: 15%;
     padding-top: 50px;
 }
+
 .f1-contain{
     display: flex;
     justify-content: space-between;
@@ -520,7 +523,6 @@ hr{
 }
 .credit{
     padding-top: 4%;
-    /* background-color: aqua; */
     width: 100%;
     display: flex;
     align-items: center;
@@ -528,6 +530,7 @@ hr{
 }
 
 .f2{
+    padding-top: 10%;
     font-size: 2vh;
 }
  
@@ -568,7 +571,6 @@ hr{
 }
     
 .search-container{
-    /* background-color: aqua; */
     width: 300px;
 }
 .city-input{
@@ -608,6 +610,60 @@ hr{
 .weather-items{
     min-width: 145px;
 }
+
+.footer {
+    position: relative;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: whitesmoke;
+    padding: 50px 15%;
+    text-align: center;
+}
+
+.f1-contain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.f1, .f2, .f3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.f2 {
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 40px 0;
+}
+
+.f3 {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.credit {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+
 }
 
 @media screen and (max-width:400px) {
