@@ -408,6 +408,13 @@ hr{
 }
 
 
+.arrow-key{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .tagline{
     font-size: 10vh;
     padding-bottom: 2%;
@@ -660,6 +667,9 @@ hr{
     margin-top: 20px;
 }
 
+.arrow-key{
+    display: none;
+}
 
 }
 

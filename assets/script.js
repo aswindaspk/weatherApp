@@ -21,6 +21,7 @@ const futureForecastContainer = document.querySelector('.future-forecast-contain
 const sunriseTime = document.querySelector('.sunrise')
 const sunsetTime = document.querySelector('.sunset')
 const locationBtn = document.querySelector('.location-btn')
+const displayDiv = document.getElementById('main')
 
 
 
@@ -41,6 +42,7 @@ const timeZoneApiKey = '13IZKCCOJM65'
 
 
 searchBtn.addEventListener('click', () => {
+    displayDiv.scrollIntoView({behavior:"smooth"})
     if (cityInput.value.trim() != '') {
      findWeather(cityInput.value.trim())
      cityInput.value = ''
@@ -52,6 +54,7 @@ searchBtn.addEventListener('click', () => {
 
 
 cityInput.addEventListener('keydown', (event) =>{
+    displayDiv.scrollIntoView({behavior:"smooth"})
     if (cityInput.value.trim() != '' && event.key == 'Enter') {
         findWeather(cityInput.value.trim())
         cityInput.value = ''
@@ -61,6 +64,7 @@ cityInput.addEventListener('keydown', (event) =>{
 
 
 locationBtn.addEventListener('click', ()=>{
+    displayDiv.scrollIntoView({behavior:"smooth"})
     getCoordinates()
 })
 
